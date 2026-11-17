@@ -22,56 +22,60 @@ export default function Plan({ learnerId, plan }: Props) {
   const weeks = Array.from({ length: plan.weeks }, (_, i) => i + 1);
 
   return (
-    <section className="card">
-      <h2>Seu plano</h2>
-      <p className="muted">
-        {plan.steps.length} passos · cerca de {Math.round(plan.total_minutes / 60)} h no total ·{" "}
-        {plan.weeks} semanas · {plan.skipped_mastered} conceitos já dominados foram pulados.
+    <div className="stack">
+      <p className="lede">
+        {plan.steps.length} passos, cerca de {Math.round(plan.total_minutes / 60)} h em {plan.weeks} semanas.{" "}
+        {plan.skipped_mastered}{" "}
+        {plan.skipped_mastered === 1 ? "conceito que você já domina foi pulado" : "conceitos que você já domina foram pulados"}.
       </p>
       {error && <p className="error">{error}</p>}
       {plan.steps.length === 0 && <p>Você já domina tudo o que mapeamos. Parabéns!</p>}
+
       {weeks.map((w) => (
-        <div key={w} className="week">
-          <h3>Semana {w}</h3>
-          <ol>
+        <section key={w} className="week">
+          <h3 className="week-title">Semana {w}</h3>
+          <ul className="steps-list">
             {plan.steps
               .filter((s) => s.week === w)
               .map((s) => (
-                <li key={s.concept_id} value={s.order}>
-                  <div className="step">
-                    <div>
-                      <strong>{s.name}</strong>{" "}
-                      <span className={`chip ${s.kind === "fundamento" ? "lacuna" : "incerto"}`}>
+                <li key={s.concept_id} className="plan-row">
+                  <span className="box" aria-hidden="true" />
+                  <div className="grow">
+                    <div className="row-title">
+                      {s.name}{" "}
+                      <span className={s.kind === "fundamento" ? "tag tag-red" : "tag"}>
                         {s.kind === "fundamento" ? "fundamento" : "conteúdo"}
                       </span>
-                      <div className="muted small">
-                        {s.reason} · {s.est_minutes} min
-                      </div>
                     </div>
-                    <button onClick={() => void openLesson(s.concept_id)}>Abrir aula</button>
+                    <div className="muted small">{s.reason}</div>
                   </div>
+                  <span className="minutes">{s.est_minutes} min</span>
+                  <button onClick={() => void openLesson(s.concept_id)}>Abrir aula</button>
                 </li>
               ))}
-          </ol>
-        </div>
+          </ul>
+        </section>
       ))}
 
       {lesson && (
-        <div className="lesson">
-          <h3>{lesson.title}</h3>
-          <p className="muted small">
-            {lesson.source === "llm" ? "Aula gerada por IA" : "Aula padrão (modo sem IA)"}
-          </p>
-          <ol>
+        <section className="sticky-note lesson" aria-label={`Aula: ${lesson.title}`}>
+          <div className="lesson-head">
+            <h3>{lesson.title}</h3>
+            <span className="margin-note">
+              {lesson.source === "llm" ? "aula gerada por IA" : "aula padrão (sem IA)"}
+            </span>
+          </div>
+          <ol className="plain lesson-steps">
             {lesson.steps.map((s, i) => (
               <li key={i}>
-                <span className="chip incerto">{s.kind}</span> {s.text}
+                <p className="pen small-pen">{s.kind}</p>
+                <p>{s.text}</p>
               </li>
             ))}
           </ol>
           <button onClick={() => setLesson(null)}>Fechar</button>
-        </div>
+        </section>
       )}
-    </section>
+    </div>
   );
 }
