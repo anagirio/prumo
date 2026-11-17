@@ -6,8 +6,9 @@ Fonte: https://hackbrasil.com e https://hackbrasil.com/regulamento (lido em 17/1
 
 - [ ] **30/11 às 23:59**: entrega (painel do time). Mirem 30/11 de tarde, não de noite.
 - [ ] **02/12**: finalistas anunciados.
-- [ ] **04/12 às 23:59**: confirmar presença na final (todos os membros devem ir, salvo ausência justificada aceita).
-- [ ] **12/12**: final presencial em São Paulo. Confirmem hoje se os 3 conseguem viajar.
+- [ ] **02/12**: finalistas anunciados online (os 5 melhores de cada trilha, com pelo menos 20 de 40 pontos na fase online). Só quem for finalista precisa viajar.
+- [ ] **04/12 às 23:59**: finalistas confirmam presença (todos os membros devem ir, salvo ausência justificada e comprovada aceita pela organização).
+- [ ] **12/12**: final presencial em São Paulo. Viagem, hospedagem e alimentação são por conta de cada participante. Vale uma conversa sem pressa: se formos finalistas, as 3 conseguem ir?
 - [ ] **15/12**: o repositório precisa seguir público até pelo menos essa data, ou o projeto perde avaliação e prêmios.
 
 ## Entrega obrigatória

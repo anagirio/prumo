@@ -23,7 +23,7 @@ Hoje é terça, 17/11. Entrega em **13 dias**. Quatro critérios pesam igual: ex
 **Ter 17/11 (hoje)**
 - Todos: rodar o projeto (`make api-install web-install test`), ler `docs/HACKATHON_CHECKLIST.md`.
 - **Criar o repositório público novo no GitHub e subir o código** (é um repositório novo, com todos os commits de agora em diante). Adicionar `LICENSE`.
-- Confirmar que os 3 podem ir a São Paulo em 12/12.
+- Conversar sobre a final: só os finalistas (anunciados em 2/12) vão a São Paulo em 12/12, todos do time, com custos por conta de cada um.
 - Decidir nome definitivo.
 
 **Qua 18/11**
@@ -69,7 +69,7 @@ Hoje é terça, 17/11. Entrega em **13 dias**. Quatro critérios pesam igual: ex
 ## Depois da entrega
 
 - 02/12: finalistas. Preparar slides e pitch sem mexer no repositório.
-- 04/12 às 23:59: confirmar presença.
+- 02/12: finalistas anunciados. 04/12 às 23:59: finalistas confirmam presença.
 - 12/12: final em São Paulo.
 - Manter repositório público e demo online até 15/12.
 

@@ -19,7 +19,7 @@ Tudo em ordem de prioridade. O que está marcado com ⏰ tem prazo duro do hacka
    ```
 3. **Conferir que o repositório está público** (selo "Public" em github.com/anagirio/prumo) e que o CI ficou verde na aba Actions.
 4. ⏰ **Chamar as outras duas** como colaboradoras (Settings, Collaborators) e mandar o link do repositório.
-5. ⏰ **Confirmar com as duas** que todas podem estar em São Paulo em 12/12 (confirmação oficial até 4/12 às 23h59).
+5. **Conversa sem pressa com as duas:** só quem chegar à final vai a São Paulo (finalistas saem em 2/12, confirmação até 4/12 às 23h59, todos do time precisam ir, custos por conta de cada um). Se alguma já sabe que não pode, melhor dizer cedo.
 
 ## Esta semana: até sexta 20/11 (marco M1)
 
@@ -41,7 +41,7 @@ Tudo em ordem de prioridade. O que está marcado com ⏰ tem prazo duro do hacka
 15. **Gravar o vídeo de 3 minutos** seguindo `docs/DEMO_SCRIPT.md` (português ou inglês). Use os números reais do piloto.
 16. **Revisar o repositório:** README claro, LICENSE, sem chaves de API nem arquivos pessoais, histórico começando depois de 4/11 às 21h.
 17. ⏰ **Submeter até segunda 30/11 às 18h** (o prazo é 23h59, a margem é de segurança): repositório público, demo online, vídeo.
-18. ⏰ Depois da entrega: **código congelado** até a final presencial em 12/12, em São Paulo. O repositório precisa ficar público até 15/12.
+18. ⏰ Depois da entrega: **código congelado**. Commits depois de 30/11 às 23h59 podem desclassificar, mesmo se vocês forem finalistas (a final presencial é em 12/12, em São Paulo, e o desenvolvimento só retoma lá). O repositório precisa ficar público até 15/12.
 
 ## Regras que valem sempre
 
