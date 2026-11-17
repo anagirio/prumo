@@ -1,0 +1,269 @@
+# Questões ORIGINAIS (escritas para o projeto; não copiam provas de bancas).
+# Regras de ouro:
+#  - cada alternativa errada descreve a concepção errada que ela revela (misconception);
+#  - suspect_prerequisites só pode listar pré-requisitos (diretos ou indiretos) do conceito;
+#  - a alternativa correta não tem misconception nem suspeitos.
+questions:
+  - id: q-classes-1
+    concept_id: classes-de-palavras
+    prompt: "Em 'Ela saiu rapidamente, mas voltou.', as palavras 'rapidamente' e 'mas' pertencem, respectivamente, às classes:"
+    options:
+      - {id: a, text: "advérbio e conjunção"}
+      - {id: b, text: "adjetivo e preposição", misconception: "Confunde advérbio (modifica o verbo) com adjetivo (modifica substantivo) e conjunção (liga orações) com preposição (liga termos)."}
+      - {id: c, text: "advérbio e preposição", misconception: "Confunde conjunção, que liga orações, com preposição, que liga termos e exige complemento."}
+      - {id: d, text: "adjetivo e conjunção", misconception: "Confunde advérbio com adjetivo: 'rapidamente' termina em -mente mas modifica o verbo 'saiu'."}
+    correct_option_id: a
+    explanation: "'Rapidamente' modifica o verbo 'saiu' (advérbio de modo) e 'mas' liga duas orações opondo ideias (conjunção adversativa)."
+
+  - id: q-flexao-1
+    concept_id: flexao-verbal
+    prompt: "Assinale a forma verbal que completa corretamente a frase: 'Se eu ______ o edital antes, teria me preparado melhor.'"
+    options:
+      - {id: a, text: "vi", misconception: "Usa o indicativo depois de 'se' numa hipótese irreal no passado."}
+      - {id: b, text: "tivesse visto"}
+      - {id: c, text: "vir", misconception: "Confunde o futuro do subjuntivo ('se eu vir') com hipótese irreal no passado."}
+      - {id: d, text: "verei", misconception: "Usa o futuro do indicativo em oração iniciada por 'se' (condicional)."}
+    correct_option_id: b
+    explanation: "Hipótese irreal no passado pede o mais-que-perfeito do subjuntivo ('tivesse visto') combinado com o futuro do pretérito composto ('teria me preparado')."
+
+  - id: q-pronomes-1
+    concept_id: pronomes
+    prompt: "Em 'Entreguei o relatório ao chefe, que o aprovou.', o pronome 'o' retoma:"
+    options:
+      - {id: a, text: "o chefe", misconception: "Retoma o termo mais próximo em vez de perguntar qual termo foi aprovado: o objeto direto de 'aprovou' é o relatório."}
+      - {id: b, text: "o relatório"}
+      - {id: c, text: "o relatório e o chefe", misconception: "Acha que o pronome pode retomar dois termos ao mesmo tempo."}
+      - {id: d, text: "toda a oração anterior", misconception: "Confunde pronome que retoma um termo com pronome que retoma uma oração inteira."}
+    correct_option_id: b
+    explanation: "Quem foi aprovado? O relatório. O pronome 'o' é objeto direto de 'aprovou' e retoma 'o relatório'."
+
+  - id: q-conjuncoes-1
+    concept_id: preposicoes-conjuncoes
+    prompt: "Em 'Estudou muito, porém não passou.', a conjunção 'porém' estabelece relação de:"
+    options:
+      - {id: a, text: "adição", misconception: "Confunde 'porém' (adversativa) com 'e' (aditiva)."}
+      - {id: b, text: "oposição"}
+      - {id: c, text: "conclusão", misconception: "Confunde adversativa com conclusiva ('portanto')."}
+      - {id: d, text: "causa", misconception: "Confunde adversativa com explicativa/causal ('porque')."}
+    correct_option_id: b
+    explanation: "'Porém' é conjunção coordenativa adversativa: a segunda ideia se opõe à expectativa criada pela primeira."
+
+  - id: q-sujeito-1
+    concept_id: sujeito-predicado
+    prompt: "Em 'Chegaram ao evento todos os convidados.', o sujeito é:"
+    options:
+      - {id: a, text: "evento", misconception: "Escolhe o substantivo mais próximo do verbo em vez de perguntar 'quem chegou?'."}
+      - {id: b, text: "todos os convidados"}
+      - {id: c, text: "Chegaram", misconception: "Confunde sujeito com verbo (núcleo do predicado).", suspect_prerequisites: [classes-de-palavras]}
+      - {id: d, text: "ao evento", misconception: "Toma um termo regido por preposição por sujeito; o sujeito nunca vem preposicionado.", suspect_prerequisites: [classes-de-palavras]}
+    correct_option_id: b
+    explanation: "Quem chegou? Todos os convidados. O sujeito pode vir depois do verbo e concorda com ele ('chegaram')."
+
+  - id: q-complementos-1
+    concept_id: complementos-verbais
+    prompt: "Em 'O gerente entregou o relatório ao diretor.', os termos 'o relatório' e 'ao diretor' são, respectivamente:"
+    options:
+      - {id: a, text: "objeto direto e objeto indireto"}
+      - {id: b, text: "objeto indireto e objeto direto", misconception: "Inverte os objetos: associa o indireto ao termo sem preposição.", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: c, text: "objeto direto e adjunto adverbial", misconception: "Confunde objeto indireto (complemento do verbo) com adjunto adverbial (termo acessório).", suspect_prerequisites: [sujeito-predicado]}
+      - {id: d, text: "adjunto adnominal e objeto indireto", misconception: "Confunde complemento verbal com termo que modifica um substantivo.", suspect_prerequisites: [sujeito-predicado]}
+    correct_option_id: a
+    explanation: "'Entregou o relatório' (sem preposição) é objeto direto; 'ao diretor' (com preposição, substituível por 'lhe') é objeto indireto."
+
+  - id: q-acessorios-1
+    concept_id: termos-acessorios
+    prompt: "Em 'A decisão do conselho, órgão máximo da instituição, surpreendeu a todos.', a expressão 'órgão máximo da instituição' exerce a função de:"
+    options:
+      - {id: a, text: "adjunto adnominal", misconception: "Confunde aposto, que identifica e explica o termo, com adjunto adnominal, que apenas o modifica.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: b, text: "aposto"}
+      - {id: c, text: "adjunto adverbial", misconception: "Confunde termo que explica um substantivo com termo que modifica o verbo.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: d, text: "vocativo", misconception: "Confunde aposto (explicativo) com vocativo (chamamento), pois ambos vêm entre vírgulas.", suspect_prerequisites: [sujeito-predicado]}
+    correct_option_id: b
+    explanation: "A expressão explica e identifica 'o conselho' e vem isolada por vírgulas: é um aposto explicativo."
+
+  - id: q-coordenacao-1
+    concept_id: coordenacao
+    prompt: "Em 'Trabalhe com atenção, pois o prazo é curto.', a oração 'pois o prazo é curto' é classificada como:"
+    options:
+      - {id: a, text: "coordenada explicativa"}
+      - {id: b, text: "subordinada adverbial causal", misconception: "Confunde coordenada explicativa (justifica a ordem) com subordinada causal (indica a causa do fato).", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: c, text: "coordenada conclusiva", misconception: "Confunde 'pois' explicativo (antes da oração) com 'pois' conclusivo (depois do verbo, entre vírgulas).", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: d, text: "coordenada adversativa", misconception: "Não identifica a relação lógica entre as orações e escolhe um tipo de coordenada ao acaso.", suspect_prerequisites: [preposicoes-conjuncoes]}
+    correct_option_id: a
+    explanation: "A oração justifica a ordem dada na anterior ('trabalhe com atenção'): é coordenada explicativa."
+
+  - id: q-substantiva-1
+    concept_id: subordinacao-substantiva
+    prompt: "Em 'É necessário que todos revisem o conteúdo.', a oração 'que todos revisem o conteúdo' é:"
+    options:
+      - {id: a, text: "subordinada substantiva subjetiva"}
+      - {id: b, text: "subordinada substantiva objetiva direta", misconception: "Confunde subjetiva (faz o papel de sujeito) com objetiva direta (complemento do verbo).", suspect_prerequisites: [complementos-verbais]}
+      - {id: c, text: "subordinada adjetiva restritiva", misconception: "Toma o 'que' por pronome relativo; aqui ele é conjunção integrante e não retoma antecedente.", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: d, text: "subordinada adverbial final", misconception: "Confunde a conjunção integrante 'que' com a locução final 'para que'.", suspect_prerequisites: [preposicoes-conjuncoes]}
+    correct_option_id: a
+    explanation: "Substitua a oração por 'isso': 'Isso é necessário'. Ela é o sujeito de 'é necessário', logo subjetiva."
+
+  - id: q-adjetiva-1
+    concept_id: subordinacao-adjetiva
+    prompt: "Em 'O servidor que foi aprovado tomou posse.', a oração 'que foi aprovado' é:"
+    options:
+      - {id: a, text: "subordinada adjetiva restritiva"}
+      - {id: b, text: "subordinada adjetiva explicativa", misconception: "Ignora a ausência de vírgulas: sem elas, a oração restringe o antecedente em vez de apenas explicá-lo.", suspect_prerequisites: [pronomes]}
+      - {id: c, text: "subordinada substantiva subjetiva", misconception: "Confunde pronome relativo (retoma 'o servidor') com conjunção integrante.", suspect_prerequisites: [pronomes]}
+      - {id: d, text: "subordinada adverbial temporal", misconception: "Não reconhece que a oração modifica um substantivo e a trata como circunstância do verbo.", suspect_prerequisites: [subordinacao-substantiva]}
+    correct_option_id: a
+    explanation: "O 'que' retoma 'o servidor' e a oração o restringe (nem todo servidor tomou posse, só o aprovado), sem vírgulas: adjetiva restritiva."
+
+  - id: q-adverbial-1
+    concept_id: subordinacao-adverbial
+    prompt: "Em 'Embora estivesse cansado, concluiu a prova.', a oração destacada expressa ideia de:"
+    options:
+      - {id: a, text: "causa", misconception: "Confunde concessão (um obstáculo que não impede) com causa (o que motiva o fato).", suspect_prerequisites: [termos-acessorios]}
+      - {id: b, text: "concessão"}
+      - {id: c, text: "condição", misconception: "Confunde concessão com condição ('se'): aqui o fato aconteceu apesar do cansaço.", suspect_prerequisites: [termos-acessorios]}
+      - {id: d, text: "consequência", misconception: "Inverte a relação lógica entre cansaço e conclusão da prova.", suspect_prerequisites: [termos-acessorios]}
+    correct_option_id: b
+    explanation: "'Embora' introduz um obstáculo que não impediu o fato principal: oração subordinada adverbial concessiva."
+
+  - id: q-pontuacao-1
+    concept_id: pontuacao
+    prompt: "Assinale a frase pontuada corretamente:"
+    options:
+      - {id: a, text: "O fiscal, verificou os documentos quando chegou ao local.", misconception: "Separa o sujeito do verbo com vírgula.", suspect_prerequisites: [coordenacao]}
+      - {id: b, text: "Quando chegou ao local o fiscal, verificou os documentos.", misconception: "Põe a vírgula depois do sujeito em vez de depois da oração adverbial deslocada.", suspect_prerequisites: [subordinacao-adverbial]}
+      - {id: c, text: "Quando chegou ao local, o fiscal verificou os documentos."}
+      - {id: d, text: "O fiscal verificou, os documentos quando chegou ao local.", misconception: "Separa o verbo do seu complemento com vírgula.", suspect_prerequisites: [complementos-verbais]}
+    correct_option_id: c
+    explanation: "A oração adverbial antecipada é seguida de vírgula; nunca se separa sujeito de verbo nem verbo de complemento."
+
+  - id: q-conc-verbal-1
+    concept_id: concordancia-verbal
+    prompt: "Assinale a alternativa em que a concordância verbal está correta."
+    options:
+      - {id: a, text: "Fazem dois anos que me preparo para o concurso.", misconception: "Faz o verbo 'fazer' concordar com o complemento, ignorando que, indicando tempo decorrido, ele é impessoal.", suspect_prerequisites: [sujeito-predicado]}
+      - {id: b, text: "Houveram muitos candidatos na prova.", misconception: "Trata 'haver' no sentido de existir como verbo pessoal; ele é impessoal.", suspect_prerequisites: [sujeito-predicado]}
+      - {id: c, text: "Os documentos de identificação precisa estar à vista.", misconception: "Concorda o verbo com o termo mais próximo ('identificação') em vez do núcleo do sujeito ('documentos').", suspect_prerequisites: [sujeito-predicado]}
+      - {id: d, text: "Faz dois anos que me preparo para o concurso."}
+    correct_option_id: d
+    explanation: "Fazer indicando tempo decorrido é impessoal e fica na 3ª pessoa do singular."
+
+  - id: q-conc-nominal-1
+    concept_id: concordancia-nominal
+    prompt: "Assinale a alternativa correta quanto à concordância nominal."
+    options:
+      - {id: a, text: "Seguem anexo as cópias dos documentos.", misconception: "Deixa 'anexo' invariável, mas ele concorda com o substantivo a que se refere ('anexas')."}
+      - {id: b, text: "Elas mesmo prepararam o material.", misconception: "Não flexiona 'mesmo', que concorda com o pronome que reforça ('mesmas')."}
+      - {id: c, text: "Seguem anexas as cópias dos documentos."}
+      - {id: d, text: "Os alunos ficaram bastantes cansados.", misconception: "Flexiona 'bastante' quando ele é advérbio e modifica adjetivo; nesse caso é invariável.", suspect_prerequisites: [classes-de-palavras]}
+    correct_option_id: c
+    explanation: "'Anexo' é adjetivo e concorda com 'cópias': anexas. 'Bastante' advérbio é invariável; 'mesmo' reforço de pronome flexiona."
+
+  - id: q-regencia-1
+    concept_id: regencia-verbal
+    prompt: "Assinale a frase cuja regência verbal está de acordo com a norma-padrão."
+    options:
+      - {id: a, text: "Aspiro o cargo de analista.", misconception: "Usa 'aspirar' (desejar) como transitivo direto; a norma pede a preposição 'a'.", suspect_prerequisites: [complementos-verbais]}
+      - {id: b, text: "Aspiro ao cargo de analista."}
+      - {id: c, text: "Prefiro mais estudar do que dormir.", misconception: "Constrói 'preferir' com 'mais... do que'; a norma pede 'preferir uma coisa a outra'.", suspect_prerequisites: [complementos-verbais]}
+      - {id: d, text: "Assisti o filme ontem.", misconception: "Usa 'assistir' (ver) sem a preposição 'a' exigida pela norma.", suspect_prerequisites: [complementos-verbais]}
+    correct_option_id: b
+    explanation: "Aspirar no sentido de desejar exige a preposição 'a'. 'Preferir' pede 'a' ('prefiro estudar a dormir') e 'assistir' (ver) pede 'ao filme'."
+
+  - id: q-crase-1
+    concept_id: crase
+    prompt: "Em qual alternativa o uso do acento indicativo de crase está correto?"
+    options:
+      - {id: a, text: "Entreguei o documento à diretora."}
+      - {id: b, text: "Entreguei o documento à ela.", misconception: "Usa crase antes de pronome pessoal, que não admite artigo.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: c, text: "Cheguei à pé ao evento.", misconception: "Usa crase antes de palavra masculina, onde não há artigo feminino.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: d, text: "Referi-me à pessoas conhecidas.", misconception: "Usa crase antes de palavra no plural sem artigo definido.", suspect_prerequisites: [preposicoes-conjuncoes]}
+    correct_option_id: a
+    explanation: "'Entregar' pede 'a' e 'diretora' admite o artigo 'a': a + a = à."
+
+  - id: q-colocacao-1
+    concept_id: colocacao-pronominal
+    prompt: "Assinale a frase com colocação pronominal adequada à norma-padrão."
+    options:
+      - {id: a, text: "Me disseram que o edital saiu.", misconception: "Começa a frase com pronome oblíquo átono.", suspect_prerequisites: [pronomes]}
+      - {id: b, text: "Disseram-me que o edital saiu."}
+      - {id: c, text: "Nunca esquecerei-me daquele dia.", misconception: "Ignora que palavras negativas atraem o pronome para antes do verbo (próclise).", suspect_prerequisites: [pronomes]}
+      - {id: d, text: "Ele disse que não vai-se inscrever.", misconception: "Usa hífen entre verbo auxiliar e pronome diante de infinitivo, e ignora a negação.", suspect_prerequisites: [flexao-verbal]}
+    correct_option_id: b
+    explanation: "Não se inicia frase com pronome átono: usa-se ênclise ('disseram-me'). Com 'nunca' o certo seria próclise ('nunca me esquecerei')."
+
+  - id: q-que-1
+    concept_id: funcoes-que-se
+    prompt: "Em qual alternativa o 'que' é pronome relativo?"
+    options:
+      - {id: a, text: "Espero que o resultado saia logo.", misconception: "Confunde conjunção integrante (introduz oração substantiva) com pronome relativo; ela não retoma antecedente.", suspect_prerequisites: [subordinacao-substantiva]}
+      - {id: b, text: "O livro que comprei é ótimo."}
+      - {id: c, text: "Estudei tanto que passei mal.", misconception: "Confunde o 'que' consecutivo com pronome relativo.", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: d, text: "Estude bem, que a prova é difícil.", misconception: "Confunde o 'que' explicativo (equivale a 'pois') com pronome relativo.", suspect_prerequisites: [preposicoes-conjuncoes]}
+    correct_option_id: b
+    explanation: "Em 'o livro que comprei', o 'que' retoma 'o livro' e pode ser trocado por 'o qual': pronome relativo."
+
+  - id: q-coesao-1
+    concept_id: coesao-referenciacao
+    prompt: "Em 'Os candidatos chegaram cedo. Eles queriam garantir um bom lugar.', o pronome 'Eles' constitui um caso de:"
+    options:
+      - {id: a, text: "anáfora, pois retoma um termo já mencionado"}
+      - {id: b, text: "catáfora, pois antecipa um termo que virá", misconception: "Inverte anáfora (retoma) e catáfora (antecipa)."}
+      - {id: c, text: "sequenciação por conectivo", misconception: "Confunde referenciação (retomar elementos) com sequenciação (conectar ideias com conectivos).", suspect_prerequisites: [preposicoes-conjuncoes]}
+      - {id: d, text: "elipse, pois o termo foi omitido", misconception: "Confunde substituição por pronome com omissão do termo.", suspect_prerequisites: [pronomes]}
+    correct_option_id: a
+    explanation: "'Eles' retoma 'os candidatos', já citado: coesão referencial anafórica."
+
+  - id: q-reescrita-1
+    concept_id: reescrita-frases
+    prompt: "O trecho 'Embora o edital seja extenso, os candidatos o leem com atenção.' pode ser reescrito, sem alterar o sentido, como:"
+    options:
+      - {id: a, text: "O edital é extenso, portanto os candidatos o leem com atenção.", misconception: "Troca concessão ('embora') por conclusão ('portanto').", suspect_prerequisites: [subordinacao-adverbial]}
+      - {id: b, text: "Apesar de o edital ser extenso, os candidatos o leem com atenção."}
+      - {id: c, text: "Visto que o edital é extenso, os candidatos o leem com atenção.", misconception: "Troca concessão por causa.", suspect_prerequisites: [subordinacao-adverbial]}
+      - {id: d, text: "Se o edital for extenso, os candidatos o leem com atenção.", misconception: "Troca concessão por condição.", suspect_prerequisites: [subordinacao-adverbial]}
+    correct_option_id: b
+    explanation: "'Embora' e 'apesar de' expressam concessão. As outras trocam a relação lógica (conclusão, causa, condição) e mudam o sentido."
+
+  - id: q-acentuacao-1
+    concept_id: acentuacao
+    prompt: "Assinale a alternativa em que todas as palavras estão corretamente acentuadas."
+    options:
+      - {id: a, text: "público, ideia, saúde"}
+      - {id: b, text: "público, idéia, saúde", misconception: "Desconhece que ditongos abertos 'ei' e 'oi' em paroxítonas perderam o acento com o Acordo Ortográfico."}
+      - {id: c, text: "publico, ideia, saude", misconception: "Não acentua proparoxítonas nem o 'u' tônico em hiato."}
+      - {id: d, text: "público, ideia, saude", misconception: "Não acentua o 'i' ou 'u' tônico em hiato (sa-ú-de)."}
+    correct_option_id: a
+    explanation: "'Público' é proparoxítona, 'saúde' tem 'u' tônico em hiato e 'ideia' perdeu o acento com o Acordo Ortográfico."
+
+  - id: q-ortografia-1
+    concept_id: ortografia
+    prompt: "Assinale a alternativa em que todas as palavras estão grafadas corretamente."
+    options:
+      - {id: a, text: "exceção, concessão, analisar"}
+      - {id: b, text: "excessão, concessão, analisar", misconception: "Generaliza -ssão para palavras que usam -ção, como exceção."}
+      - {id: c, text: "exceção, concessão, analizar", misconception: "Troca s por z em verbo derivado de 'análise'."}
+      - {id: d, text: "exceção, consessão, analisar", misconception: "Não relaciona 'concessão' à família de 'conceder'."}
+    correct_option_id: a
+    explanation: "Exceção (de excetuar), concessão (de conceder) e analisar (de análise) seguem a grafia indicada."
+
+  - id: q-interpretacao-1
+    concept_id: interpretacao-ideia-central
+    prompt: "Leia: 'Muitos candidatos acreditam que estudar mais horas garante a aprovação. No entanto, quem estuda sem revisar nem resolver questões costuma esquecer boa parte do conteúdo. O que faz diferença, portanto, é o método, e não apenas o tempo dedicado.' Qual é a ideia central do trecho?"
+    options:
+      - {id: a, text: "O método de estudo importa mais do que a quantidade de horas."}
+      - {id: b, text: "Estudar muitas horas é a melhor estratégia.", misconception: "Toma como tese a opinião que o texto refuta ('muitos acreditam que...')."}
+      - {id: c, text: "Revisar e resolver questões é desnecessário.", misconception: "Inverte a relação entre as ideias do texto, lendo o contrário do que o autor afirma."}
+      - {id: d, text: "Os candidatos esquecem o conteúdo porque estudam pouco.", misconception: "Confunde um detalhe do argumento com a ideia central do texto."}
+    correct_option_id: a
+    explanation: "'No entanto' marca a virada e 'portanto' marca a conclusão: o texto defende que o método pesa mais do que o tempo."
+
+  - id: q-significacao-1
+    concept_id: significacao-palavras
+    prompt: "Em 'O gestor foi veemente ao defender a proposta.', o termo 'veemente' pode ser substituído, sem prejuízo de sentido, por:"
+    options:
+      - {id: a, text: "tímido", misconception: "Escolhe o antônimo do termo."}
+      - {id: b, text: "enérgico"}
+      - {id: c, text: "vago", misconception: "Não conhece o sentido da palavra e deduz por semelhança de som ou de contexto."}
+      - {id: d, text: "hesitante", misconception: "Escolhe um termo de sentido oposto ao da defesa firme da proposta."}
+    correct_option_id: b
+    explanation: "'Veemente' significa intenso, apaixonado, enérgico."

@@ -1,0 +1,171 @@
+# Grafo de pré-requisitos de Língua Portuguesa (SEED).
+# ATENÇÃO: as dependências e os pesos são hipóteses de trabalho e precisam ser validados
+# com um professor ou com provas anteriores. 'weight' é a importância estimada em provas.
+concepts:
+  - id: classes-de-palavras
+    name: Classes de palavras
+    description: "Toda palavra pertence a uma classe (substantivo, adjetivo, verbo, advérbio, pronome, preposição, conjunção...) definida pela função que exerce na frase, não pela terminação. O advérbio modifica verbo, adjetivo ou outro advérbio; o adjetivo modifica substantivo; a conjunção liga orações ou termos de mesma função; a preposição liga termos criando dependência entre eles."
+    prerequisites: []
+    topics: [morfologia]
+    weight: 1.0
+
+  - id: flexao-verbal
+    name: Flexão verbal (tempos e modos)
+    description: "O verbo varia em pessoa, número, tempo e modo. Indicativo expressa fatos; subjuntivo expressa hipótese, dúvida ou desejo; imperativo expressa ordem. Em hipóteses irreais no passado, usa-se o mais-que-perfeito do subjuntivo ('se eu tivesse visto') com o futuro do pretérito ('teria feito')."
+    prerequisites: [classes-de-palavras]
+    topics: [morfologia, verbos]
+    weight: 1.0
+
+  - id: pronomes
+    name: Pronomes (tipos e retomada)
+    description: "Pronomes substituem ou acompanham substantivos. Os oblíquos átonos (me, te, o, a, lhe, se...) retomam termos já mencionados e têm função de complemento; para saber a quem o pronome se refere, pergunte qual termo exerce o papel exigido pelo verbo, e não qual está mais próximo."
+    prerequisites: [classes-de-palavras]
+    topics: [morfologia, pronomes]
+    weight: 1.0
+
+  - id: preposicoes-conjuncoes
+    name: Preposições e conjunções
+    description: "Preposições ligam termos (a, de, em, com, para...) e exigem complemento. Conjunções ligam orações. Coordenativas: aditivas (e), adversativas (mas, porém), alternativas (ou), conclusivas (portanto), explicativas (pois, porque). Subordinativas: integrantes (que, se), causais, concessivas (embora), condicionais (se), finais (para que), entre outras."
+    prerequisites: [classes-de-palavras]
+    topics: [morfologia, conectivos]
+    weight: 1.2
+
+  - id: sujeito-predicado
+    name: Sujeito e predicado
+    description: "Sujeito é o termo sobre o qual se declara algo; concorda com o verbo e nunca é regido por preposição. Para achá-lo, pergunte 'quem pratica ou sofre a ação do verbo?'. Pode vir depois do verbo ('Chegaram os convidados'). Predicado é tudo o que se declara sobre o sujeito, e seu núcleo é o verbo ou o nome predicativo."
+    prerequisites: [classes-de-palavras, flexao-verbal]
+    topics: [sintaxe]
+    weight: 1.2
+
+  - id: complementos-verbais
+    name: Objeto direto e indireto
+    description: "Objeto direto completa o verbo sem preposição obrigatória ('entregou o relatório'); objeto indireto completa o verbo com preposição ('entregou ao diretor'). Teste: substitua o objeto direto por o/a/os/as e o indireto por lhe/lhes."
+    prerequisites: [sujeito-predicado, preposicoes-conjuncoes]
+    topics: [sintaxe]
+    weight: 1.0
+
+  - id: termos-acessorios
+    name: Adjunto adnominal, adjunto adverbial e aposto
+    description: "Termos acessórios acrescentam informação. Adjunto adnominal modifica substantivo; adjunto adverbial modifica verbo, adjetivo ou advérbio (tempo, lugar, modo...). Aposto explica ou identifica outro termo e costuma vir entre vírgulas ('o conselho, órgão máximo da instituição')."
+    prerequisites: [sujeito-predicado, classes-de-palavras]
+    topics: [sintaxe]
+    weight: 1.0
+
+  - id: coordenacao
+    name: Orações coordenadas
+    description: "Orações coordenadas são sintaticamente independentes e se ligam por conjunções coordenativas (aditivas, adversativas, alternativas, conclusivas, explicativas). A explicativa justifica a afirmação anterior ('Trabalhe com atenção, pois o prazo é curto')."
+    prerequisites: [sujeito-predicado, preposicoes-conjuncoes]
+    topics: [sintaxe, periodo-composto]
+    weight: 1.0
+
+  - id: subordinacao-substantiva
+    name: Orações subordinadas substantivas
+    description: "Exercem função de substantivo (sujeito, objeto, predicativo...) e costumam ser introduzidas pela conjunção integrante 'que' ou 'se'. Teste: substitua a oração por 'isso'. Em 'É necessário que todos revisem', a oração é o sujeito de 'é necessário' (subjetiva)."
+    prerequisites: [coordenacao, complementos-verbais, preposicoes-conjuncoes]
+    topics: [sintaxe, periodo-composto]
+    weight: 1.0
+
+  - id: subordinacao-adjetiva
+    name: Orações subordinadas adjetivas
+    description: "Funcionam como adjetivo, modificando um antecedente, e são introduzidas por pronome relativo (que, o qual, cujo, onde...). Restritiva: sem vírgulas, limita o antecedente. Explicativa: entre vírgulas, apenas acrescenta informação."
+    prerequisites: [subordinacao-substantiva, pronomes]
+    topics: [sintaxe, periodo-composto]
+    weight: 1.0
+
+  - id: subordinacao-adverbial
+    name: Orações subordinadas adverbiais
+    description: "Funcionam como adjunto adverbial e expressam circunstâncias: causa (porque), consequência (tanto que), condição (se), concessão (embora, ainda que: algo que poderia impedir, mas não impede), finalidade (para que), tempo (quando), comparação, conformidade, proporção."
+    prerequisites: [subordinacao-substantiva, termos-acessorios]
+    topics: [sintaxe, periodo-composto]
+    weight: 1.2
+
+  - id: pontuacao
+    name: Pontuação (vírgula)
+    description: "A vírgula organiza termos e orações. Não se separa sujeito de verbo, nem verbo de complemento. Separa-se: aposto, vocativo, adjunto adverbial deslocado, orações coordenadas (exceto as ligadas por 'e' com mesmo sujeito), orações adverbiais antepostas e adjetivas explicativas (sempre aos pares)."
+    prerequisites: [coordenacao, subordinacao-adverbial, termos-acessorios]
+    topics: [pontuacao]
+    weight: 1.3
+
+  - id: concordancia-verbal
+    name: Concordância verbal
+    description: "O verbo concorda com o núcleo do sujeito, não com o termo mais próximo. Verbos impessoais ficam no singular: haver no sentido de existir ('Houve muitos candidatos') e fazer indicando tempo decorrido ('Faz dois anos')."
+    prerequisites: [sujeito-predicado, flexao-verbal]
+    topics: [concordancia]
+    weight: 1.2
+
+  - id: concordancia-nominal
+    name: Concordância nominal
+    description: "Adjetivos, pronomes, artigos e numerais concordam em gênero e número com o substantivo. 'Anexo', 'mesmo' e 'próprio' concordam com o termo a que se referem; 'bastante' e 'meio' como advérbios (modificando adjetivo) são invariáveis."
+    prerequisites: [classes-de-palavras]
+    topics: [concordancia]
+    weight: 1.0
+
+  - id: regencia-verbal
+    name: Regência verbal
+    description: "Regência é a relação entre o verbo e seus complementos. Na norma-padrão: aspirar ao cargo (desejar), assistir ao filme (ver), preferir uma coisa a outra, obedecer a alguém, visar ao objetivo. A preposição exigida varia conforme o sentido do verbo."
+    prerequisites: [complementos-verbais]
+    topics: [regencia]
+    weight: 1.2
+
+  - id: crase
+    name: Crase
+    description: "Crase é a fusão da preposição 'a' com o artigo feminino 'a(s)' ou com pronomes demonstrativos. Só ocorre se o verbo ou nome exigir a preposição 'a' E a palavra seguinte admitir artigo feminino. Não há crase antes de masculino, verbo, pronome pessoal ou palavra no plural sem artigo."
+    prerequisites: [regencia-verbal, preposicoes-conjuncoes, classes-de-palavras]
+    topics: [crase]
+    weight: 1.3
+
+  - id: colocacao-pronominal
+    name: Colocação pronominal
+    description: "Próclise (pronome antes do verbo) é obrigatória com palavras negativas, advérbios sem pausa, pronomes relativos e conjunções subordinativas. Ênclise (depois do verbo, com hífen) é a regra no início de oração. Não se começa frase com pronome oblíquo átono."
+    prerequisites: [pronomes, flexao-verbal]
+    topics: [pronomes]
+    weight: 1.0
+
+  - id: funcoes-que-se
+    name: Funções do 'que'
+    description: "O 'que' pode ser pronome relativo (retoma um antecedente: 'o livro que comprei'), conjunção integrante (introduz oração substantiva: 'espero que saia'), conjunção consecutiva ('tanto que'), conjunção explicativa ('estude, que a prova é difícil'), entre outras. Teste do relativo: dá para trocá-lo por 'o qual' retomando um termo anterior?"
+    prerequisites: [pronomes, preposicoes-conjuncoes, subordinacao-substantiva]
+    topics: [morfologia, sintaxe]
+    weight: 1.1
+
+  - id: coesao-referenciacao
+    name: Coesão e referenciação
+    description: "Coesão é a ligação entre partes do texto. Referenciação retoma ou antecipa elementos: anáfora retoma algo já dito ('Os candidatos chegaram. Eles...'); catáfora antecipa algo que virá. Sequenciação liga ideias com conectivos."
+    prerequisites: [pronomes, preposicoes-conjuncoes]
+    topics: [texto]
+    weight: 1.2
+
+  - id: reescrita-frases
+    name: Reescrita e substituição de trechos
+    description: "Reescrever mantendo o sentido exige trocar o conectivo por outro de mesma relação lógica (concessão por concessão, causa por causa), preservar a concordância, a regência, a crase e a colocação dos pronomes, e ajustar a pontuação."
+    prerequisites: [pontuacao, concordancia-verbal, regencia-verbal, crase, colocacao-pronominal]
+    topics: [reescrita]
+    weight: 1.5
+
+  - id: acentuacao
+    name: Acentuação gráfica
+    description: "Proparoxítonas sempre levam acento (público). O 'i' e o 'u' tônicos em hiato levam acento (saúde). Desde o Acordo Ortográfico, ditongos abertos 'ei' e 'oi' em paroxítonas perderam o acento (ideia, heroico)."
+    prerequisites: []
+    topics: [ortografia]
+    weight: 0.8
+
+  - id: ortografia
+    name: Ortografia
+    description: "Grafia correta depende da origem e da família da palavra: exceção (com ç), concessão (de conceder), analisar (verbos derivados de 'análise' usam s). Em caso de dúvida, procure a palavra primitiva ou a família de palavras."
+    prerequisites: [acentuacao]
+    topics: [ortografia]
+    weight: 0.8
+
+  - id: interpretacao-ideia-central
+    name: "Interpretação: ideia central e inferência"
+    description: "A ideia central é a tese que o texto defende, não um detalhe nem uma opinião que ele refuta. Cuidado com trechos do tipo 'muitos acreditam que...', que costumam introduzir a posição contrária à do autor. Conectores como 'no entanto' e 'portanto' marcam a virada e a conclusão."
+    prerequisites: []
+    topics: [interpretacao]
+    weight: 1.5
+
+  - id: significacao-palavras
+    name: Significação das palavras
+    description: "Sinonímia, antonímia, polissemia, denotação e conotação. O sentido depende do contexto; substituir uma palavra por outra exige equivalência de sentido e de registro naquele contexto."
+    prerequisites: []
+    topics: [semantica]
+    weight: 1.0
