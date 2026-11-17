@@ -32,6 +32,7 @@ make test            # roda os testes do backend
 make api             # API em http://localhost:8000  (docs em /docs)
 make web             # frontend em http://localhost:5173
 make simulate        # compara o diagnóstico com baselines em alunos sintéticos
+make calibrate       # recalibra os parâmetros (treino/teste separados, ~6 min)
 ```
 
 Sem `make`: veja os comandos no `Makefile`.
@@ -56,7 +57,7 @@ docs/            arquitetura, avaliação, roadmap, checklist do regulamento
 
 ## Estado atual
 
-Funciona de ponta a ponta com 24 conceitos e 24 questões de Português: diagnóstico, relatório com grafo, plano e aula (modo template). **Veja `docs/ROADMAP.md` para o que fazer até 30/11** e `docs/EVALUATION.md` para o que a simulação mostra e o que ela não prova.
+Funciona de ponta a ponta com 24 conceitos e 24 questões de Português: diagnóstico, relatório com grafo, plano e aula (modo template). **Veja `docs/PROXIMOS_PASSOS.md` (passo a passo) e `docs/ROADMAP.md` (dia a dia) para o que fazer até 30/11** e `docs/EVALUATION.md` para o que a simulação mostra e o que ela não prova.
 
 ## Limitações assumidas
 

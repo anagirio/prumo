@@ -39,10 +39,7 @@ export default function Report({ report, graph, onPlan }: Props) {
 
       {concept && (
         <div className="card detail">
-          <p className="eyebrow">
-            {report.status[concept.id] ?? "sem dados"} · domínio estimado{" "}
-            {Math.round((report.mastery[concept.id] ?? 0.5) * 100)}%
-          </p>
+          <p className="eyebrow">{report.status[concept.id] ?? "sem dados"}</p>
           <h3>{concept.name}</h3>
           <p>{concept.description}</p>
           {concept.prerequisites.length > 0 && (

@@ -38,12 +38,32 @@ class SyntheticStudent:
         return self.rng.choice(wrong)
 
 
+@dataclass(frozen=True)
+class Population:
+    """Como os alunos sintéticos são gerados. Variar isso testa a robustez do motor."""
+
+    name: str = "padrao"
+    max_root_gaps: int = 3
+    noise: float = 0.05
+    slip: float = 0.10
+
+
+POPULATIONS = (
+    Population("padrao"),
+    Population("ruidosa", noise=0.15),
+    Population("desatenta", slip=0.20),
+    Population("muitas_lacunas", max_root_gaps=5),
+    Population("poucas_lacunas", max_root_gaps=1, noise=0.02),
+)
+
+
 def make_student(
     graph: KnowledgeGraph,
     rng: random.Random,
     max_root_gaps: int = 3,
     noise: float = 0.05,
     max_unknown_fraction: float = 0.7,
+    slip: float = 0.10,
 ) -> SyntheticStudent:
     ids = list(graph.concepts)
     for _ in range(50):
@@ -58,7 +78,7 @@ def make_student(
             unknown.symmetric_difference_update({cid})
     known = set(ids) - unknown
     true_roots = {c for c in unknown if not any(p in unknown for p in graph.prerequisites(c))}
-    return SyntheticStudent(known=known, true_root_gaps=true_roots, rng=rng)
+    return SyntheticStudent(known=known, true_root_gaps=true_roots, rng=rng, slip=slip)
 
 
 def run_session(
@@ -94,6 +114,18 @@ class Metrics:
     root_recall: float
     root_precision: float
     avg_questions: float
+    brier: float = 0.0  # erro quadrático de P(não domina) vs. verdade (menor = melhor)
+    ece: float = 0.0  # erro de calibração esperado em 10 faixas (menor = melhor)
+
+    @property
+    def root_f1(self) -> float:
+        p, r = self.root_precision, self.root_recall
+        return 2 * p * r / (p + r) if p + r else 0.0
+
+    @property
+    def objective(self) -> float:
+        """Critério único usado na calibração: média de F1 de lacunas e F1 de bases."""
+        return (self.f1 + self.root_f1) / 2
 
 
 def evaluate(
@@ -102,15 +134,19 @@ def evaluate(
     n_students: int = 300,
     max_questions: int = 12,
     seed: int = 7,
+    strategies: tuple[str, ...] = STRATEGIES,
+    population: Population | None = None,
 ) -> dict[str, Metrics]:
     engine = DiagnosisEngine(graph, bank, max_questions=max_questions)
+    pop = population or Population()
     results: dict[str, Metrics] = {}
     ids = list(graph.concepts)
-    for strategy in STRATEGIES:
+    for strategy in strategies:
         rng = random.Random(seed)  # mesma sequência de alunos para todas as estratégias
-        acc = prec = rec = f1 = root_rec = root_prec = qs = 0.0
+        acc = prec = rec = f1 = root_rec = root_prec = qs = brier = 0.0
+        bins = [[0, 0.0, 0.0] for _ in range(10)]  # n, soma das probabilidades, soma dos y
         for _ in range(n_students):
-            student = make_student(graph, rng)
+            student = make_student(graph, rng, pop.max_root_gaps, pop.noise, slip=pop.slip)
             model = run_session(graph, bank, student, strategy, max_questions, rng)
             unknown_true = set(ids) - student.known
             unknown_pred = {c for c in ids if model.mastery[c] < 0.5}
@@ -129,8 +165,18 @@ def evaluate(
             root_rec += hits / len(student.true_root_gaps) if student.true_root_gaps else 1.0
             root_prec += hits / len(predicted_roots) if predicted_roots else 0.0
             qs += len(model.history)
+            for c in ids:
+                p_unknown = 1.0 - model.mastery[c]
+                y = 1.0 if c in unknown_true else 0.0
+                brier += (p_unknown - y) ** 2 / len(ids)
+                b = bins[min(9, int(p_unknown * 10))]
+                b[0] += 1
+                b[1] += p_unknown
+                b[2] += y
         n = float(n_students)
+        total = sum(b[0] for b in bins)
+        ece = sum(abs(b[1] - b[2]) for b in bins if b[0]) / total if total else 0.0
         results[strategy] = Metrics(
-            acc / n, prec / n, rec / n, f1 / n, root_rec / n, root_prec / n, qs / n
+            acc / n, prec / n, rec / n, f1 / n, root_rec / n, root_prec / n, qs / n, brier / n, ece
         )
     return results

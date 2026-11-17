@@ -14,10 +14,11 @@ from prumo.graph import KnowledgeGraph
 from prumo.learner import LearnerModel, status_of
 from prumo.models import DiagnosisReport, MisconceptionFinding, Question
 
-# Pesos da seleção de perguntas, escolhidos por varredura na simulação (docs/EVALUATION.md).
-REACH_WEIGHT = 0.02
-GAP_DESCENT_BONUS = 2.0
-SUSPECT_BONUS = 1.0
+# Pesos da seleção de perguntas, calibrados em sementes de treino e medidos em sementes de
+# teste separadas (scripts/calibrate.py, docs/EVALUATION.md).
+REACH_WEIGHT = 0.0
+GAP_DESCENT_BONUS = 1.0
+SUSPECT_BONUS = 2.0
 
 
 class DiagnosisEngine:

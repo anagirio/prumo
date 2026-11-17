@@ -14,6 +14,7 @@ make test                              # pytest (backend)
 make api                               # uvicorn prumo.main:create_app --factory, porta 8000
 make web                               # vite :5173
 make simulate                          # avaliação com alunos sintéticos
+make calibrate                         # recalibra parâmetros (treino/teste separados)
 cd apps/api && .venv/bin/ruff check . && .venv/bin/ruff format .
 cd apps/web && npm run build           # typecheck + build
 ```
@@ -35,7 +36,7 @@ cd apps/web && npm run build           # typecheck + build
 ## Convenções
 
 - Python 3.11+, ruff (linha 100), tipos em tudo que for público. Português nos textos para o usuário; identificadores em português sem acento ou inglês, mas consistentes.
-- Testes em `apps/api/tests`. Mudou o motor? Rode `make simulate` e confira se os números não pioraram.
+- Testes em `apps/api/tests`. Mudou o motor? Rode `make simulate` e `make calibrate` e confira se os números não pioraram. Nunca reporte resultado nos mesmos alunos usados para ajustar.
 - Textos para o time: sem travessão longo; usar vírgula, dois-pontos ou ponto.
 
 ## Como adicionar conteúdo

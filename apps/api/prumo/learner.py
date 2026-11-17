@@ -7,7 +7,10 @@ propaga evidência pelo grafo:
 * erro    -> a culpa é dividida: alternativas erradas apontam pré-requisitos suspeitos
              (que perdem mais crença) e os dependentes do conceito ficam menos prováveis.
 
-Os números abaixo são heurísticas explícitas e ajustáveis, não valores aprendidos.
+Os números abaixo são heurísticas explícitas e ajustáveis, não valores aprendidos. Foram
+calibrados com `scripts/calibrate.py` (treino/teste separados, ver docs/EVALUATION.md). As
+probabilidades NÃO são calibradas como chance real: servem para ordenar e classificar, e a
+probabilidade absoluta depende do prior 0.5, que é uma escolha de projeto.
 """
 
 from __future__ import annotations
@@ -18,15 +21,15 @@ from prumo.graph import KnowledgeGraph
 from prumo.models import AnswerRecord, Question, Status
 
 PRIOR = 0.5
-MASTERED_AT = 0.7  # p >= isso: dominado
+MASTERED_AT = 0.6  # p >= isso: dominado
 GAP_AT = 0.35  # p <= isso: lacuna
-SLIP = 0.10  # prob. de errar sabendo
+SLIP = 0.05  # prob. de errar sabendo
 MIN_P, MAX_P = 0.02, 0.98
 
 ACERTO_BOOST = 0.6  # força do reforço nos pré-requisitos após um acerto
-SUSPECT_FACTOR = 0.5  # fator aplicado a pré-requisitos suspeitos após um erro
+SUSPECT_FACTOR = 0.7  # fator aplicado a pré-requisitos suspeitos após um erro
 DIRECT_PREREQ_FACTOR = 0.85  # fator aplicado aos demais pré-requisitos diretos após um erro
-DEPENDENT_PENALTY = 0.25  # penalidade máxima nos dependentes após um erro
+DEPENDENT_PENALTY = 0.4  # penalidade máxima nos dependentes após um erro
 INFERRED_BLAME_FLOOR = GAP_AT + 0.01  # culpa inferida não classifica pré-requisito como lacuna
 
 

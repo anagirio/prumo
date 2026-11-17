@@ -1,4 +1,4 @@
-.PHONY: api-install web-install api web test simulate lint format build
+.PHONY: api-install web-install api web test simulate calibrate lint format build
 
 api-install:
 	cd apps/api && python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -14,6 +14,9 @@ web:
 
 test:
 	cd apps/api && .venv/bin/pytest -q
+
+calibrate:
+	cd apps/api && PYTHONPATH=. .venv/bin/python scripts/calibrate.py --out ../../docs/calibration_result.json
 
 simulate:
 	cd apps/api && .venv/bin/python scripts/simulate_students.py --students 500 --max-questions 12

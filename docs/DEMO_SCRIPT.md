@@ -9,7 +9,7 @@ A comunicação vale 25% da nota. O vídeo é a entrada do júri.
 | 0:40 a 1:30 | Demo do diagnóstico | Responder 3 ou 4 perguntas; mostrar o mapa mudando de cor ao vivo; mostrar o feedback "o que essa escolha sugere" |
 | 1:30 a 2:00 | Relatório e plano | A lacuna-raiz com borda grossa; o plano começando pela base, não pelo peso da matéria |
 | 2:00 a 2:20 | Aula | Abrir a aula de um fundamento, com os erros da pessoa citados |
-| 2:20 a 2:45 | Prova de que funciona | Os números: simulação (grafo sobe o F1 de 0,47 para 0,61 com 12 perguntas) e **resultados do piloto real** |
+| 2:20 a 2:45 | Prova de que funciona | Os números: simulação em alunos não vistos no ajuste (grafo sobe o F1 de 0,46 para 0,66 com 12 perguntas) e **resultados do piloto real** |
 | 2:45 a 3:00 | Fechamento | Impacto: quem não pode pagar mentoria. "Mesmo motor, outras matérias" |
 
 Dicas:
