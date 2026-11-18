@@ -62,3 +62,20 @@ def test_unknown_learner_and_invalid_inputs(client):
     assert client.post(f"/api/learners/{lid}/diagnosis/answer", json=bad).status_code == 422
     assert client.get(f"/api/learners/{lid}/plan?targets=nao-existe").status_code == 404
     assert client.post(f"/api/learners/{lid}/lessons", json={"concept_id": "x"}).status_code == 404
+
+
+def test_serve_static_front(tmp_path):
+    from fastapi.testclient import TestClient
+
+    from prumo.main import create_app
+
+    (tmp_path / "index.html").write_text("<h1>prumo</h1>")
+    import os
+
+    os.environ["PRUMO_STATIC"] = str(tmp_path)
+    try:
+        client = TestClient(create_app(db_path=":memory:"))
+        assert client.get("/").text == "<h1>prumo</h1>"
+        assert client.get("/api/health").json()["ok"] is True
+    finally:
+        del os.environ["PRUMO_STATIC"]

@@ -29,3 +29,6 @@ format:
 
 build:
 	cd apps/web && npm run build
+
+docker:
+	docker build -t prumo . && docker run --rm -p 8000:8000 prumo

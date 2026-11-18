@@ -1,0 +1,10 @@
+# Blueprint do Render (render.com): New > Blueprint > escolha o repo.
+services:
+  - type: web
+    name: prumo
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: PRUMO_LLM
+        value: mock          # troque para anthropic e adicione ANTHROPIC_API_KEY se quiser aulas por IA

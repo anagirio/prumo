@@ -10,6 +10,7 @@ import os
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from prumo.content import load_graph, load_question_bank
@@ -174,5 +175,12 @@ def create_app(
             mastery=model.mastery[concept.id],
         )
         return llm_client.lesson(req)
+
+    # Deploy em um container só: se PRUMO_STATIC apontar para o build do front
+    # (apps/web/dist), a API também serve o site na raiz. Montado por último para
+    # não esconder as rotas /api.
+    static_dir = os.environ.get("PRUMO_STATIC")
+    if static_dir and os.path.isdir(static_dir):
+        app.mount("/", StaticFiles(directory=static_dir, html=True), name="web")
 
     return app
