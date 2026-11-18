@@ -128,7 +128,7 @@ class Plan(BaseModel):
 
 
 class LessonStep(BaseModel):
-    kind: Literal["prever", "explicar", "revisar", "atencao", "verificar"]
+    kind: Literal["prever", "explicar", "revisar", "atencao", "exercicio", "dica", "verificar"]
     text: str
 
 

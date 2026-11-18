@@ -84,7 +84,7 @@ export interface Plan {
 }
 
 export interface LessonStep {
-  kind: "prever" | "explicar" | "revisar" | "atencao" | "verificar";
+  kind: "prever" | "explicar" | "revisar" | "atencao" | "exercicio" | "dica" | "verificar";
   text: string;
 }
 

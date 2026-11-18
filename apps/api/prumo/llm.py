@@ -19,6 +19,9 @@ from typing import Protocol
 
 from prumo.models import Concept, Lesson, LessonStep
 
+# Corrigir poucos erros por vez: muita correção de uma só vez desanima o aluno.
+MAX_ERRORS_PER_LESSON = 3
+
 
 @dataclass
 class LessonRequest:
@@ -52,8 +55,8 @@ class MockLLM:
                     text="Isto se apoia em: " + ", ".join(req.prerequisite_names) + ".",
                 )
             )
-        for m in req.misconceptions:
-            steps.append(LessonStep(kind="atencao", text=f"Erro comum que você cometeu: {m}"))
+        for m in req.misconceptions[:MAX_ERRORS_PER_LESSON]:
+            steps.append(LessonStep(kind="atencao", text=f"Vale ficar de olho: {m}"))
         steps.append(
             LessonStep(
                 kind="verificar",
@@ -92,17 +95,24 @@ class AnthropicLLM:
 
     @staticmethod
     def _prompt(req: LessonRequest) -> str:
+        errors = req.misconceptions[:MAX_ERRORS_PER_LESSON]
         return (
-            "Você é um tutor de Língua Portuguesa para concursos públicos. Monte uma aula curta "
+            "Você é um professor de Língua Portuguesa (português do Brasil) para concursos públicos, "
+            "com tom simples e encorajador. Monte uma aula curta "
             f"sobre o conceito '{req.concept.name}'.\n"
             f"Resumo curado do conceito: {req.concept.description}\n"
             f"Pré-requisitos do aluno: {', '.join(req.prerequisite_names) or 'nenhum'}.\n"
             f"Domínio estimado do aluno (0 a 1): {req.mastery:.2f}.\n"
-            f"Erros que o aluno cometeu: {'; '.join(req.misconceptions) or 'nenhum registrado'}.\n"
-            "Regras: apoie-se no que o aluno já domina; comece pedindo uma previsão; corrija os erros "
-            "listados; termine com uma verificação. Não invente regras gramaticais.\n"
+            f"Erros que o aluno cometeu: {'; '.join(errors) or 'nenhum registrado'}.\n"
+            "Estrutura da aula, nesta ordem: (1) prever: um aquecimento que peça uma previsão; "
+            "(2) explicar: explicação curta; (3) revisar: só se houver pré-requisito; "
+            "(4) atencao: um passo por erro listado, explicando o motivo de forma simples e sem "
+            "culpar o aluno; (5) exercicio: um exercício prático; (6) dica: uma dica que faça o "
+            "aluno raciocinar, SEM entregar a resposta; (7) verificar: como o aluno confere a "
+            "própria resposta. Nunca dê a resposta do exercício pronta. "
+            "Apoie-se só no resumo curado e não invente regras gramaticais.\n"
             'Responda SOMENTE com JSON: {"title": str, "steps": [{"kind": one of '
-            '"prever"|"explicar"|"revisar"|"atencao"|"verificar", "text": str}]}'
+            '"prever"|"explicar"|"revisar"|"atencao"|"exercicio"|"dica"|"verificar", "text": str}]}'
         )
 
 
