@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { api } from "../api";
-import type { Lesson, Plan as PlanData } from "../types";
+import type { Lesson, LessonStep, Plan as PlanData } from "../types";
+import Practice from "./Practice";
+
+const STEP_LABEL: Record<LessonStep["kind"], string> = {
+  prever: "aquecimento",
+  explicar: "explicação curta",
+  revisar: "revise antes",
+  atencao: "fique de olho",
+  exercicio: "exercício",
+  dica: "dica",
+  verificar: "para conferir",
+};
 
 interface Props {
   learnerId: string;
@@ -10,9 +21,11 @@ interface Props {
 export default function Plan({ learnerId, plan }: Props) {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [practicing, setPracticing] = useState(false);
 
   const openLesson = async (conceptId: string) => {
     try {
+      setPracticing(false);
       setLesson(await api.lesson(learnerId, conceptId));
     } catch (e) {
       setError((e as Error).message);
@@ -68,12 +81,21 @@ export default function Plan({ learnerId, plan }: Props) {
           <ol className="plain lesson-steps">
             {lesson.steps.map((s, i) => (
               <li key={i}>
-                <p className="pen small-pen">{s.kind}</p>
+                <p className="pen small-pen">{STEP_LABEL[s.kind]}</p>
                 <p>{s.text}</p>
               </li>
             ))}
           </ol>
-          <button onClick={() => setLesson(null)}>Fechar</button>
+          {practicing ? (
+            <Practice learnerId={learnerId} conceptId={lesson.concept_id} />
+          ) : (
+            <button className="primary" onClick={() => setPracticing(true)}>
+              Praticar este tema
+            </button>
+          )}
+          <div className="actions">
+            <button onClick={() => setLesson(null)}>Fechar</button>
+          </div>
         </section>
       )}
     </div>

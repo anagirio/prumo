@@ -57,6 +57,25 @@ class LessonIn(BaseModel):
     concept_id: str
 
 
+class PracticeOut(BaseModel):
+    question: PublicQuestion | None
+
+
+class PracticeCheckIn(BaseModel):
+    question_id: str
+    option_id: str
+    # True quando o aluno desistiu ou esgotou as tentativas: aí sim mostramos o gabarito.
+    reveal: bool = False
+
+
+class PracticeCheckOut(BaseModel):
+    correct: bool
+    # Pista: descreve o raciocínio errado da alternativa escolhida, sem entregar a resposta.
+    hint: str | None
+    explanation: str | None
+    correct_option_id: str | None
+
+
 def create_app(
     db_path: str | None = None,
     llm: LLMClient | None = None,
@@ -175,6 +194,42 @@ def create_app(
             mastery=model.mastery[concept.id],
         )
         return llm_client.lesson(req)
+
+    @app.get("/api/learners/{learner_id}/practice", response_model=PracticeOut)
+    def practice(learner_id: str, concept_id: str, exclude: str = "") -> PracticeOut:
+        """Exercício de fixação de um conceito (não altera o modelo do aluno)."""
+        model = load_model(learner_id)
+        if concept_id not in graph.concepts:
+            raise HTTPException(404, "conceito não encontrado")
+        skip = {x for x in exclude.split(",") if x}
+        asked = model.asked_question_ids()
+        wrong = {h.question_id for h in model.history if not h.correct}
+        candidates = [q for q in bank.for_concept(concept_id) if q.id not in skip]
+        # Prioridade: ainda não vista, depois a que errou, depois qualquer outra.
+        candidates.sort(key=lambda q: (q.id in asked, q.id not in wrong))
+        if not candidates:
+            return PracticeOut(question=None)
+        q = candidates[0]
+        return PracticeOut(
+            question=PublicQuestion.from_question(q, graph.concepts[q.concept_id].name)
+        )
+
+    @app.post("/api/practice/check", response_model=PracticeCheckOut)
+    def practice_check(body: PracticeCheckIn) -> PracticeCheckOut:
+        try:
+            q = bank.get(body.question_id)
+        except KeyError:
+            raise HTTPException(404, "questão não encontrada") from None
+        if body.option_id not in {o.id for o in q.options}:
+            raise HTTPException(422, "alternativa inválida")
+        correct = body.option_id == q.correct_option_id
+        show = correct or body.reveal
+        return PracticeCheckOut(
+            correct=correct,
+            hint=None if correct else q.option(body.option_id).misconception,
+            explanation=q.explanation if show else None,
+            correct_option_id=q.correct_option_id if show else None,
+        )
 
     # Deploy em um container só: se PRUMO_STATIC apontar para o build do front
     # (apps/web/dist), a API também serve o site na raiz. Montado por último para

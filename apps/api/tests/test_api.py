@@ -79,3 +79,48 @@ def test_serve_static_front(tmp_path):
         assert client.get("/api/health").json()["ok"] is True
     finally:
         del os.environ["PRUMO_STATIC"]
+
+
+def test_practice_hint_first_and_no_leak(client):
+    lid = client.post("/api/learners").json()["learner_id"]
+    r = client.get(f"/api/learners/{lid}/practice", params={"concept_id": "pronomes"}).json()
+    q = r["question"]
+    assert q["concept_id"] == "pronomes" and "correct_option_id" not in q
+    # Rodando todas as alternativas: a errada dá pista SEM gabarito; a certa libera a explicação.
+    outs = {
+        o["id"]: client.post(
+            "/api/practice/check", json={"question_id": q["id"], "option_id": o["id"]}
+        ).json()
+        for o in q["options"]
+    }
+    right = [o for o in outs.values() if o["correct"]]
+    assert len(right) == 1 and right[0]["explanation"]
+    for o in outs.values():
+        if not o["correct"]:
+            assert o["hint"] and o["explanation"] is None and o["correct_option_id"] is None
+    wrong_id = next(i for i, o in outs.items() if not o["correct"])
+    revealed = client.post(
+        "/api/practice/check",
+        json={"question_id": q["id"], "option_id": wrong_id, "reveal": True},
+    ).json()
+    assert revealed["correct_option_id"] and revealed["explanation"]
+
+
+def test_practice_rotates_and_prefers_unseen(client):
+    lid = client.post("/api/learners").json()["learner_id"]
+    seen = []
+    for _ in range(2):
+        q = client.get(
+            f"/api/learners/{lid}/practice",
+            params={"concept_id": "pronomes", "exclude": ",".join(seen)},
+        ).json()["question"]
+        seen.append(q["id"])
+    assert len(set(seen)) == 2
+    last = client.get(
+        f"/api/learners/{lid}/practice",
+        params={"concept_id": "pronomes", "exclude": ",".join(seen)},
+    ).json()
+    assert last["question"] is None
+    assert (
+        client.get(f"/api/learners/{lid}/practice", params={"concept_id": "x"}).status_code == 404
+    )

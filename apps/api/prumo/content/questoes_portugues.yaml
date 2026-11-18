@@ -267,3 +267,48 @@ questions:
       - {id: d, text: "enérgico"}
     correct_option_id: d
     explanation: "'Veemente' significa intenso, apaixonado, enérgico."
+
+  # Segunda questão dos quatro conceitos de base (poucas questões = diagnóstico fraco neles).
+  - id: q-classes-2
+    concept_id: classes-de-palavras
+    prompt: "Em 'A prova foi difícil, mas ela respondeu tudo com calma.', as palavras 'difícil' e 'calma' classificam-se, respectivamente, como:"
+    options:
+      - {id: a, text: "adjetivo e substantivo"}
+      - {id: b, text: "advérbio e adjetivo", misconception: "Acha que a palavra que acompanha o verbo 'foi' é advérbio; 'difícil' caracteriza o sujeito 'a prova', logo é adjetivo."}
+      - {id: c, text: "adjetivo e adjetivo", misconception: "Não percebe que 'calma' vem depois de preposição e nomeia uma qualidade como coisa: é substantivo."}
+      - {id: d, text: "substantivo e adjetivo", misconception: "Inverte as classes: 'difícil' caracteriza 'a prova' (adjetivo) e 'calma' é o termo regido por 'com' (substantivo)."}
+    correct_option_id: a
+    explanation: "'Difícil' caracteriza o substantivo 'prova' (adjetivo). 'Calma' é o termo regido pela preposição 'com' e nomeia algo (substantivo); 'com calma' funciona como expressão de modo."
+
+  - id: q-sujeito-2
+    concept_id: sujeito-predicado
+    prompt: "Em 'Na reunião de ontem, foram discutidos os prazos do edital.', o sujeito é:"
+    options:
+      - {id: a, text: "a reunião de ontem", misconception: "Toma um termo regido por preposição ('na') por sujeito; o sujeito nunca vem preposicionado.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: b, text: "os prazos do edital"}
+      - {id: c, text: "o edital", misconception: "Escolhe o substantivo mais próximo do fim da frase e ignora que o verbo 'foram discutidos' está no plural e concorda com 'os prazos'."}
+      - {id: d, text: "ontem", misconception: "Confunde advérbio de tempo com sujeito: 'ontem' não responde a 'o que foi discutido?'.", suspect_prerequisites: [classes-de-palavras]}
+    correct_option_id: b
+    explanation: "O que foi discutido? Os prazos do edital. O sujeito vem depois do verbo e concorda com ele: 'foram discutidos' (plural) com 'os prazos'."
+
+  - id: q-conjuncoes-2
+    concept_id: preposicoes-conjuncoes
+    prompt: "Em 'Ou você se prepara agora, ou perderá a vaga.', a conjunção 'ou' estabelece relação de:"
+    options:
+      - {id: a, text: "adição", misconception: "Confunde 'ou' (alternativa) com 'e' (aditiva): aqui as ideias se excluem, não se somam."}
+      - {id: b, text: "oposição", misconception: "Confunde alternativa com adversativa ('mas', 'porém'): não há contraste com uma expectativa, há duas possibilidades."}
+      - {id: c, text: "alternância"}
+      - {id: d, text: "conclusão", misconception: "Confunde alternativa com conclusiva ('portanto'): a segunda oração não é consequência da primeira, é outra opção."}
+    correct_option_id: c
+    explanation: "'Ou' é conjunção coordenativa alternativa: apresenta duas possibilidades que se excluem."
+
+  - id: q-pronomes-2
+    concept_id: pronomes
+    prompt: "Em 'A professora entregou as provas aos alunos e lhes pediu silêncio.', o pronome 'lhes' retoma:"
+    options:
+      - {id: a, text: "as provas", misconception: "Retoma o objeto direto em vez do indireto: 'pediu silêncio a quem?', e 'lhe(s)' é complemento indireto."}
+      - {id: b, text: "a professora", misconception: "Acha que o pronome oblíquo retoma o sujeito; 'lhes' completa o verbo e se refere a outra pessoa.", suspect_prerequisites: [classes-de-palavras]}
+      - {id: c, text: "silêncio", misconception: "Escolhe o termo mais próximo do pronome, sem perguntar a quem o pedido foi feito."}
+      - {id: d, text: "os alunos"}
+    correct_option_id: d
+    explanation: "Pediu silêncio a quem? Aos alunos. 'Lhes' é complemento indireto (equivale a 'a eles') e retoma 'os alunos'."

@@ -4,6 +4,8 @@ import type {
   GraphData,
   Lesson,
   NextQuestionOut,
+  PracticeCheck,
+  PublicQuestion,
   Plan,
   StateOut,
 } from "./types";
@@ -34,6 +36,15 @@ export const api = {
   report: (id: string) => req<DiagnosisReport>(`/learners/${id}/report`),
   plan: (id: string, minutesPerWeek = 300) =>
     req<Plan>(`/learners/${id}/plan?minutes_per_week=${minutesPerWeek}`),
+  practice: (id: string, conceptId: string, exclude: string[] = []) =>
+    req<{ question: PublicQuestion | null }>(
+      `/learners/${id}/practice?concept_id=${conceptId}&exclude=${exclude.join(",")}`,
+    ),
+  practiceCheck: (questionId: string, optionId: string, reveal = false) =>
+    req<PracticeCheck>("/practice/check", {
+      method: "POST",
+      body: JSON.stringify({ question_id: questionId, option_id: optionId, reveal }),
+    }),
   lesson: (id: string, conceptId: string) =>
     req<Lesson>(`/learners/${id}/lessons`, {
       method: "POST",

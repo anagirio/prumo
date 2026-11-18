@@ -240,3 +240,8 @@ ul.plain { list-style: none; padding: 0; }
   .plan-row { flex-wrap: wrap; }
   .prompt { font-size: 22px; }
 }
+
+/* exercício de fixação dentro da aula */
+.practice { display: grid; gap: 12px; margin: 6px 0 16px; padding-top: 14px; border-top: 1.5px dashed var(--ink-faint); }
+.practice .prompt { font-size: 19px; margin: 0; }
+.practice .correcao { padding: 12px 14px; border: 1.5px dashed var(--ink-faint); border-radius: 6px; }

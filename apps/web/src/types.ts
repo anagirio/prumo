@@ -94,3 +94,10 @@ export interface Lesson {
   steps: LessonStep[];
   source: "mock" | "llm";
 }
+
+export interface PracticeCheck {
+  correct: boolean;
+  hint: string | null;
+  explanation: string | null;
+  correct_option_id: string | null;
+}
