@@ -70,7 +70,7 @@ Parâmetros que mudaram: `SLIP` 0,10 para 0,05, `SUSPECT_FACTOR` 0,5 para 0,7, `
 Meta: 5 a 10 concurseiros entre 25/11 e 28/11.
 
 1. Cada pessoa faz o diagnóstico adaptativo (12 perguntas).
-2. Depois responde **todas as 24 questões** (teste completo, que serve de referência).
+2. Depois responde **todas as 28 questões** (teste completo, que serve de referência).
 3. Medir: concordância por conceito entre o diagnóstico curto e o teste completo; tempo gasto; nota de utilidade do plano (1 a 5) e uma frase livre sobre "isso reflete o que eu sei?".
 4. Pedir também a autoavaliação antes de começar, para comparar com o diagnóstico.
 5. Registrar tudo anonimamente (o id do aluno é aleatório). **Não coletar nome, e-mail nem outro dado pessoal.** Avisar que é um teste de um projeto de hackathon.

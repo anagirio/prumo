@@ -13,7 +13,7 @@ Hoje é terça, 17/11. Entrega em **13 dias**. Quatro critérios pesam igual: ex
 | Marco | Data | O que precisa estar de pé |
 |---|---|---|
 | M1 | Sex 20/11 | Diagnóstico ponta a ponta **online** (front + API no ar) |
-| M2 | Ter 24/11 | Aula e prática funcionando; 2 questões nos conceitos de base |
+| M2 | Ter 24/11 | Aula e prática funcionando (feito); 2 questões nos conceitos de base (feito, falta revisão humana) |
 | M3 | Qui 26/11 | Piloto com concurseiros em andamento, dados sendo coletados |
 | Freeze | Sex 27/11 à noite | Congelamento de funcionalidades; só correções |
 | Entrega | Seg 30/11 | Submetido até as 18h (margem de 6h) |

@@ -37,6 +37,10 @@ make calibrate       # recalibra os parâmetros (treino/teste separados, ~6 min)
 
 Sem `make`: veja os comandos no `Makefile`.
 
+## Colocando no ar
+
+Um `Dockerfile` na raiz compila o front e a API serve tudo (um container, um link). Passo a passo em `docs/DEPLOY.md` (Render, via `render.yaml`). Teste local: `make docker`.
+
 Aulas por IA (opcional): `pip install -e "apps/api[llm]"` e exporte `PRUMO_LLM=anthropic` e `ANTHROPIC_API_KEY=...`. Sem isso, a API usa aulas por template (`MockLLM`), e a demo nunca depende de rede.
 
 ## Estrutura
@@ -50,17 +54,18 @@ apps/api/prumo/
   content/       grafo de Português e questões originais (YAML)
   llm.py         camada de IA (mock e Anthropic), só nas bordas
   simulation.py  alunos sintéticos para avaliar a mecânica
-  main.py        API FastAPI
+  main.py        API FastAPI (e serve o front compilado em produção)
 apps/web/        Vite + React + TypeScript
+Dockerfile       build único (front + API); render.yaml é o blueprint do Render
 docs/            arquitetura, avaliação, roadmap, checklist do regulamento
 ```
 
 ## Estado atual
 
-Funciona de ponta a ponta com 24 conceitos e 24 questões de Português: diagnóstico, relatório com grafo, plano e aula (modo template). **Veja `docs/PROXIMOS_PASSOS.md` (passo a passo) e `docs/ROADMAP.md` (dia a dia) para o que fazer até 30/11** e `docs/EVALUATION.md` para o que a simulação mostra e o que ela não prova.
+Funciona de ponta a ponta com 24 conceitos e 28 questões de Português: diagnóstico, relatório com grafo, plano, aula e exercício com dica (a pista mostra o raciocínio por trás da alternativa errada, sem entregar a resposta). Roda sem IA; com IA, a aula segue a estrutura aquecimento, explicação, exercício, dica e verificação. **Veja `docs/PROXIMOS_PASSOS.md` (passo a passo) e `docs/ROADMAP.md` (dia a dia) para o que fazer até 30/11** e `docs/EVALUATION.md` para o que a simulação mostra e o que ela não prova.
 
 ## Limitações assumidas
 
 - O grafo de dependências e os pesos são **hipóteses de trabalho**: precisam de validação com professor e provas anteriores.
-- Há 1 questão por conceito. Com chute de 25%, uma questão só dá evidência fraca.
+- Há 1 questão por conceito, e 2 nos quatro conceitos de base. Com chute de 25%, uma questão só dá evidência fraca.
 - As métricas de simulação validam a mecânica, **não** a eficácia com pessoas reais. O piloto com concurseiros é o que prova.
